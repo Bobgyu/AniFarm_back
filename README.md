@@ -7,15 +7,19 @@
 ```
 back/
 ├── app.py              # 메인 애플리케이션
-├── backend.py          # 백엔드 로직
 ├── chatbot.py          # 챗봇 기능
 ├── weather.py          # 날씨 관련 기능
 ├── image_classifier.py # 이미지 분석
-├── routes/            # API 라우트
+├── growthcalendar.py   # 작물 성장 달력
+├── support.py          # 고객 지원 기능
+├── swagger.py          # API 문서화
+├── young_api.py        # 영농 정보 API
+├── youtube.py          # 유튜브 관련 기능
 ├── utils/             # 유틸리티 함수
 ├── services/          # 서비스 로직
 ├── pricedata/         # 가격 데이터
 ├── pricepython/       # 가격 예측 모델
+├── Crawler/           # 웹 크롤링 관련
 └── db.sql             # 데이터베이스 스키마
 ```
 
@@ -35,7 +39,8 @@ back/
 - 참외 질병 예측 (`image_classifier.py`)
 - 작물 가격 예측 (`pricepython/`)
 - 실시간 농산물 가격 정보 (`pricedata/`)
-- 시장 정보 조회
+- 작물 성장 달력 (`growthcalendar.py`)
+- 영농 정보 API 연동 (`young_api.py`)
 
 ### 2. 사용자 관리
 
@@ -43,7 +48,7 @@ back/
 - 로그인/로그아웃 (JWT 인증)
 - 사용자 프로필 관리
 
-### 3. 커뮤니티
+### 3. 커뮤니티 및 지원
 
 - 게시글 작성/조회/수정/삭제
 - 댓글 작성/조회
@@ -51,6 +56,12 @@ back/
   - 텃밭 정보
   - 농산물 마켓
   - 자유게시판
+- 고객 지원 기능 (`support.py`)
+- 챗봇 기능 (`chatbot.py`)
+
+### 4. 미디어
+
+- 유튜브 관련 기능 (`youtube.py`)
 
 ## 시작하기
 
@@ -77,16 +88,7 @@ npm install  # 일부 기능에 필요한 Node.js 패키지 설치
 ```
 
 3. 환경 변수 설정
-   `.env` 파일을 생성하고 다음 내용을 설정하세요:
-
-```
-DB_HOST=localhost
-DB_USER=your_db_user
-DB_PASS=your_db_password
-DB_NAME=your_db_name
-DB_PORT=5432
-JWT_SECRET=your_jwt_secret
-```
+   `.env` 파일을 생성하고 필요한 환경 변수를 설정하세요.
 
 4. 데이터베이스 설정
 
@@ -106,7 +108,7 @@ uvicorn app:app --reload
 
 API 문서는 서버 실행 후 다음 URL에서 확인할 수 있습니다:
 
-- Swagger UI: http://localhost:8000/docs
+- Swagger UI: http://localhost:8000/swagger
 - ReDoc: http://localhost:8000/redoc
 
 ## API 엔드포인트
@@ -117,6 +119,8 @@ API 문서는 서버 실행 후 다음 URL에서 확인할 수 있습니다:
 - POST `/api/disease/predict` - 질병 이미지 분석
 - GET `/api/price/predict` - 작물 가격 예측
 - GET `/api/price/current` - 실시간 가격 정보
+- GET `/api/growth-calendar` - 작물 성장 달력
+- GET `/api/young-info` -  청년농 정보
 
 ### 사용자 관리
 
@@ -132,6 +136,15 @@ API 문서는 서버 실행 후 다음 URL에서 확인할 수 있습니다:
 - GET `/api/posts/{id}` - 게시글 조회
 - PUT `/api/posts/{id}` - 게시글 수정
 - DELETE `/api/posts/{id}` - 게시글 삭제
+
+### 지원
+
+- POST `/api/support` - 청년 사업 지원 요청
+- GET `/api/support/chat` - 챗봇 대화
+
+### 미디어
+
+- GET `/api/youtube` - 유튜브 관련 정보
 
 ## 테스트
 
